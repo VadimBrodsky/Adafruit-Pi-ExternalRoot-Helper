@@ -103,6 +103,9 @@ info "fs create" "Creating ${target_partition}"
     parted --script "${target_drive}" mklabel gpt
     parted --script --align optimal "${target_drive}" mkpart primary ext4 0% 100%
 
+    # Fix bug where the HDD is not yet available
+sleep 1
+
 info "fs create" "Creating ext4 filesystem on ${target_partition}"
     mkfs -t ext4 -L rootfs "${target_partition}"
 
